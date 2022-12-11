@@ -39,12 +39,6 @@ docker run -d -p 5672:5672 -p 15672:15672 --name some-rabbit -e RABBITMQ_DEFAULT
 
 ### 连接 RabbitMQ Broker
 
-```yaml
-key: value
-```
-
-{: .nolineno }
-
 ```java
 package com.mq.config;
 
@@ -72,42 +66,42 @@ import java.util.Collections;
 @Configuration
 public class RabbitFactoryConfig {
 
- @Bean
- public ConnectionFactory connectionFactory() {
-  // 创建连接工厂,获取MQ的连接。因为是本地服务，所以用 localhost
-  CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost", "5672");
-  // 本地 RabbitMQ 服务的用户名和密码，后续可以集成到 application 配置文件中
-  connectionFactory.setUsername("guest");
-  connectionFactory.setPassword("guest");
-  connectionFactory.setVirtualHost("/");
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        // 创建连接工厂,获取MQ的连接。因为是本地服务，所以用 localhost
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost", "5672");
+        // 本地 RabbitMQ 服务的用户名和密码，后续可以集成到 application 配置文件中
+        connectionFactory.setUsername("guest");
+        connectionFactory.setPassword("guest");
+        connectionFactory.setVirtualHost("/");
 
-  connectionFactory.setConnectionListeners(Collections.singletonList(getConnectionListener()));
-  return connectionFactory;
- }
+        connectionFactory.setConnectionListeners(Collections.singletonList(getConnectionListener()));
+        return connectionFactory;
+    }
 
- private ConnectionListener getConnectionListener() {
-  return new ConnectionListener() {
-   @Override
-   public void onCreate(@NonNull Connection connection) {
-    log.info("RabbitMQ 创建连接");
-   }
+    private ConnectionListener getConnectionListener() {
+        return new ConnectionListener() {
+            @Override
+            public void onCreate(@NonNull Connection connection) {
+              log.info("RabbitMQ 创建连接");
+            }
 
-   @Override
-   public void onClose(@NonNull Connection connection) {
-    log.info("RabbitMQ 关闭连接");
-   }
+            @Override
+            public void onClose(@NonNull Connection connection) {
+              log.info("RabbitMQ 关闭连接");
+            }
 
-   @Override
-   public void onShutDown(@NonNull ShutdownSignalException signal) {
-    log.error("RabbitMQ ShutDown! 详情: ", signal);
-   }
+            @Override
+            public void onShutDown(@NonNull ShutdownSignalException signal) {
+              log.error("RabbitMQ ShutDown! 详情: ", signal);
+            }
 
-   @Override
-   public void onFailed(@NonNull Exception exception) {
-    log.error("RabbitMQ Failed! 详情: ", exception);
-   }
-  };
- }
+            @Override
+            public void onFailed(@NonNull Exception exception) {
+              log.error("RabbitMQ Failed! 详情: ", exception);
+            }
+        };
+    }
 }
 ```
 
@@ -134,65 +128,64 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Configuration
 public class RabbitExchangeAndQueueConfig {
+    // 交换机
+    private static final String PUBLIC_EXCHANGE = "exchange.direct.public";
+    private static final String DELAY_EXCHANGE = "exchange.direct.delay";
+    private static final String DLX_EXCHANGE = "exchange.direct.dlx.application";
 
-  // 交换机
-  private static final String PUBLIC_EXCHANGE = "exchange.direct.public";
- private static final String DELAY_EXCHANGE = "exchange.direct.delay";
- private static final String DLX_EXCHANGE = "exchange.direct.dlx.application";
+    // 路由
+    public static final String APP1_KEY = "app1.routing.key";
+    public static final String APP2_KEY = "app2.routing.key";
+    public static final String DLX_PUBLIC_KEY = "dlx.public.routing.key";
 
-  // 路由
-  public static final String APP1_KEY = "app1.routing.key";
- public static final String APP2_KEY = "app2.routing.key";
- public static final String DLX_PUBLIC_KEY = "dlx.public.routing.key";
+    // 队列
+    public static final String APP1_QUEUE = "queue.direct.app1";
+    public static final String APP2_QUEUE = "queue.direct.app2";
 
-  // 队列
-  public static final String APP1_QUEUE = "queue.direct.app1";
- public static final String APP2_QUEUE = "queue.direct.app2";
+    @Bean
+    public DirectExchange publicExchange() {
+        return ExchangeBuilder.directExchange(PUBLIC_EXCHANGE).build();
+    }
 
- @Bean
- public DirectExchange publicExchange() {
-  return ExchangeBuilder.directExchange(PUBLIC_EXCHANGE).build();
- }
+    /**
+      * app1 消息发送队列，并指定死信队列
+      *
+      * @return 队列
+      */
+    @Bean
+    public Queue app1Queue() {
+        Map<String, Object> params = new ConcurrentHashMap<>(4);
+        // 指定死信交换器
+        params.put("x-dead-letter-exchange", DLX_EXCHANGE);
+        // 指定死信队列
+        params.put("x-dead-letter-routing-key", DLX_PUBLIC_KEY.getCode());
+        return QueueBuilder.durable(APP1_QUEUE).withArguments(params).build();
+    }
 
- /**
-  * app1 消息发送队列，并指定死信队列
-  *
-  * @return 队列
-  */
- @Bean
- public Queue app1Queue() {
-  Map<String, Object> params = new ConcurrentHashMap<>(4);
-  // 指定死信交换器
-  params.put("x-dead-letter-exchange", DLX_EXCHANGE);
-  // 指定死信队列
-  params.put("x-dead-letter-routing-key", DLX_PUBLIC_KEY.getCode());
-  return QueueBuilder.durable(APP1_QUEUE).withArguments(params).build();
- }
+    /**
+      * app2 消息发送队列，并指定死信队列
+      *
+      * @return 队列
+      */
+    @Bean
+    public Queue app2Queue() {
+        Map<String, Object> params = new ConcurrentHashMap<>(4);
+        // 指定死信交换器
+        params.put("x-dead-letter-exchange", DLX_EXCHANGE);
+        // 指定死信队列
+        params.put("x-dead-letter-routing-key", DLX_PUBLIC_KEY.getCode());
+        return QueueBuilder.durable(APP2_QUEUE).withArguments(params).build();
+    }
 
- /**
-  * app2 消息发送队列，并指定死信队列
-  *
-  * @return 队列
-  */
- @Bean
- public Queue app2Queue() {
-  Map<String, Object> params = new ConcurrentHashMap<>(4);
-  // 指定死信交换器
-  params.put("x-dead-letter-exchange", DLX_EXCHANGE);
-  // 指定死信队列
-  params.put("x-dead-letter-routing-key", DLX_PUBLIC_KEY.getCode());
-  return QueueBuilder.durable(APP2_QUEUE).withArguments(params).build();
- }
+    @Bean
+    public Binding bindingApp1Queue() {
+        return BindingBuilder.bind(app1Queue()).to(publicExchange()).with(APP1_KEY.getCode());
+    }
 
- @Bean
- public Binding bindingApp1Queue() {
-  return BindingBuilder.bind(app1Queue()).to(publicExchange()).with(APP1_KEY.getCode());
- }
-
- @Bean
- public Binding bindingApp2Queue() {
-  return BindingBuilder.bind(app2Queue()).to(publicExchange()).with(APP2_KEY.getCode());
- }
+    @Bean
+    public Binding bindingApp2Queue() {
+        return BindingBuilder.bind(app2Queue()).to(publicExchange()).with(APP2_KEY.getCode());
+    }
 }
 ```
 
