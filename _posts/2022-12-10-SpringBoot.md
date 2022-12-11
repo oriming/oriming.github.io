@@ -39,6 +39,12 @@ docker run -d -p 5672:5672 -p 15672:15672 --name some-rabbit -e RABBITMQ_DEFAULT
 
 ### 连接 RabbitMQ Broker
 
+```yaml
+key: value
+```
+
+{: .nolineno }
+
 ```java
 package com.mq.config;
 
@@ -189,3 +195,5 @@ public class RabbitExchangeAndQueueConfig {
  }
 }
 ```
+
+{: .nolineno }
