@@ -2,11 +2,11 @@
 
 cdns:
   # Google Fonts
-  - url: http://fonts.useso.com
+  - url: https://cdn.bytedance.com
   # - url: https://fonts.googleapis.com
   - url: https://fonts.gstatic.com
     args: crossorigin
-  - url: http://fonts.useso.com
+  - url: https://cdn.bytedance.com 
   # - url: https://fonts.googleapis.com
   # jsDelivr CDN
   - url: https://cdn.jsdelivr.net
