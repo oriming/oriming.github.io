@@ -52,12 +52,15 @@ google_site_verification:               # fill in to your verification string
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
 
+# 屏蔽谷歌分析
 # google_analytics:
 #   id:                 # fill in your Google Analytics ID
 #   # Google Analytics pageviews report settings
 #   pv:
 #     proxy_endpoint:   # fill in the Google Analytics superProxy endpoint of Google App Engine
 #     cache_path:       # the local PV cache data, friendly to visitors from GFW region
+
+baidu_tongji: 21d5841eddc605f8c944a72be259374a
 
 # Prefer color scheme setting.
 #
