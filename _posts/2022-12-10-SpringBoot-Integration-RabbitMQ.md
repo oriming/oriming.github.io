@@ -1,9 +1,9 @@
 ---
 title: SpringBoot Integration RabbitMQ
 author: Sunny Boy
-date: 2022-12-08 14:10:00 +0800
+date: 2022-11-08 14:10:00 +0800
 categories: [SpringBoot, RabbitMQ]
-tags: [Spring]
+tags: [Spring, RabbitMQ]
 render_with_liquid: false
 ---
 
@@ -23,6 +23,8 @@ docker run -d -p 5672:5672 -p 15672:15672 --name some-rabbit -e RABBITMQ_DEFAULT
 
 👀 **特别说明：**
 
+1. 命令说明
+
 + `5672:5672` RabbitMQ 容器监听的默认端口号。后续 SpringBoot 链接 RabbitMQ 端口就是这个！
 + `15672:15672` 是 RabbitMQ Web 管理页面暴露出的端口号，我们看一下官方解释
 
@@ -31,6 +33,47 @@ docker run -d -p 5672:5672 -p 15672:15672 --name some-rabbit -e RABBITMQ_DEFAULT
 启动成功后，登陆管理平台验证即可，如下所示
 
 ![本地管理平台](/assets/img/2022-12-10-SpringBoot/2022-12-11-20-43-43.png)
+
+2. 插件安装
+
++ ① 下载
+前往官方 [官方插件下载地址](<https://www.rabbitmq.com/community-plugins.html>) 下载 `rabbitmq_delayed_message_exchange` 插件到本地，文件后缀 `.ez`
+
+  ⚠️ **注意：找到正确的插件版本。** 可以在 Docker 容器中执行 `rabbitmqctl --version` 获取 RabbitMQ 的版本信息，以此作为依据下载对应的插件版本!
+
++ ② 导入到指定目录
+
+  进入容器，查看插件安装目录
+
+  ```bash
+  # 登陆 Docker 容器：
+  docker exec -it some-rabbit bash
+
+  # 查询插件安装目录
+  rabbitmq-plugins directories
+    Listing plugin directories used by node rabbit@ea5925747aaf
+    Plugin archives directory: /opt/rabbitmq/plugins
+    Plugin expansion directory: /var/lib/rabbitmq/mnesia/rabbit@ea5925747aaf-plugins-expand
+    Enabled plugins file: /etc/rabbitmq/enabled_plugins
+
+  # 可以看到，插件的安装目录是：/opt/rabbitmq/plugins，所以把插件上传到此目录中
+  ```
+
+  通过 `docker cp` 指令传输插件包到 `/opt/rabbitmq/plugins`
+
+  ```bash
+  # 打开电脑主机终端，传输插件到容器指定目录
+  docker cp rabbitmq_delayed_message_exchange-3.11.1.ez some-rabbit:/opt/rabbitmq/plugins
+
+  # 开启插件
+  rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+  # 验证是否开启成功
+  rabbitmq-plugins list | grep delayed
+
+  # 只要第一列显示 [E*] 就证明安装并启动成功
+  [E*] rabbitmq_delayed_message_exchange 3.11.1
+  ```
 
 ## 正文开始
 
@@ -104,6 +147,8 @@ public class RabbitFactoryConfig {
     }
 }
 ```
+
+{: .nolineno }
 
 ### Exchange 与 Queue 配置示例
 
@@ -190,3 +235,85 @@ public class RabbitExchangeAndQueueConfig {
 ```
 
 {: .nolineno }
+
+### 消息发送 Service
+
+```java
+package priv.component.service;
+
+import org.springframework.lang.NonNull;
+
+/**
+ * 消息发送
+ *
+ * @author Sunny Boy
+ * @date 2022/9/14 09:09
+ */
+public interface MsgSender {
+
+    /**
+      * 向指定的路由发送消息
+      *
+      * @param routingKey 路由key
+      * @param message    消息内容
+      */
+    void send(@NonNull String routingKey, @NonNull String message);
+
+    /**
+      * RabbitMQ 实现延时器任务。到时之后会自动转到 {@link priv.component.constant.QueueConstant#DLX_DELAY_QUEUE} 队列
+      *
+      * @param message   消息内容
+      * @param delayTime 消息延时时间，单位：毫秒
+      */
+    void delay(@NonNull String message, @NonNull int delayTime);
+}
+```
+
+### 消息消费
+
+```java
+package priv.component.consumer;
+
+import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+import priv.component.constant.QueueConstant;
+import priv.component.exception.MqMessageException;
+import priv.component.model.dto.MqMessage;
+
+/**
+ * Sd APP 接收器
+ *
+ * @author Sunny Boy
+ * @date 2022/11/12 10:25
+ */
+@Slf4j
+@Component
+public class SdAppConsumer {
+
+    @RabbitListener(queues = QueueConstant.SD_APP_QUEUE)
+    public void receiver(String message) {
+        log.info("接收的消息: {}", message);
+        boolean typeJSON = JSONUtil.isTypeJSON(message);
+        if (!typeJSON) {
+        throw new MqMessageException("RabbitMQ 消息异常");
+        }
+
+        MqMessage body = JSONUtil.toBean(message, MqMessage.class);
+        Assert.notNull(body, "sd app consumer 接收的消息异常");
+    }
+
+}
+```
+
+## 测试
+
+启动服务，发起集成测试，验证消息是否成功订阅：
+
+```bash
+2022-12-13 21:38:14.094  INFO 14686 --- [ntContainer#2-1] priv.component.consumer.SdAppConsumer    : 接收的消息: {"resultEnum":"SUCCESS","typeEnum":"PORT_VALUE","content":"test"}
+```
+
+**[演示代码 Github 地址！！！](https://github.com/3bluebird/SpringBoot-Integration-RabbitMQ)**
