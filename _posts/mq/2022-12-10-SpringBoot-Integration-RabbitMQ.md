@@ -25,55 +25,55 @@ docker run -d -p 5672:5672 -p 15672:15672 --name some-rabbit -e RABBITMQ_DEFAULT
 
 1. 命令说明
 
-+ `5672:5672` RabbitMQ 容器监听的默认端口号。后续 SpringBoot 链接 RabbitMQ 端口就是这个！
-+ `15672:15672` 是 RabbitMQ Web 管理页面暴露出的端口号，我们看一下官方解释
+    + `5672:5672` RabbitMQ 容器监听的默认端口号。后续 SpringBoot 链接 RabbitMQ 端口就是这个！
+    + `15672:15672` 是 RabbitMQ Web 管理页面暴露出的端口号，我们看一下官方解释
 
-![官方解释](/assets/img/2022-12-10-SpringBoot/2022-12-11-20-44-40.png)
+    ![官方解释](/assets/img/2022-12-10-SpringBoot/2022-12-11-20-44-40.png)
 
-启动成功后，登陆管理平台验证即可，如下所示
+    启动成功后，登陆管理平台验证即可，如下所示
 
-![本地管理平台](/assets/img/2022-12-10-SpringBoot/2022-12-11-20-43-43.png)
+    ![本地管理平台](/assets/img/2022-12-10-SpringBoot/2022-12-11-20-43-43.png)
 
 2. 插件安装
 
-+ ① 下载
-前往官方 [官方插件下载地址](<https://www.rabbitmq.com/community-plugins.html>) 下载 `rabbitmq_delayed_message_exchange` 插件到本地，文件后缀 `.ez`
+    + ① 下载
+    前往官方 [官方插件下载地址](<https://www.rabbitmq.com/community-plugins.html>) 下载 `rabbitmq_delayed_message_exchange` 插件到本地，文件后缀 `.ez`
 
-  ⚠️ **注意：找到正确的插件版本。** 可以在 Docker 容器中执行 `rabbitmqctl --version` 获取 RabbitMQ 的版本信息，以此作为依据下载对应的插件版本!
+      ⚠️ **注意：找到正确的插件版本。** 可以在 Docker 容器中执行 `rabbitmqctl --version` 获取 RabbitMQ 的版本信息，以此作为依据下载对应的插件版本!
 
-+ ② 导入到指定目录
+    + ② 导入到指定目录
 
-  进入容器，查看插件安装目录
+      进入容器，查看插件安装目录
 
-  ```bash
-  # 登陆 Docker 容器：
-  docker exec -it some-rabbit bash
+      ```bash
+      # 登陆 Docker 容器：
+      docker exec -it some-rabbit bash
 
-  # 查询插件安装目录
-  rabbitmq-plugins directories
-    Listing plugin directories used by node rabbit@ea5925747aaf
-    Plugin archives directory: /opt/rabbitmq/plugins
-    Plugin expansion directory: /var/lib/rabbitmq/mnesia/rabbit@ea5925747aaf-plugins-expand
-    Enabled plugins file: /etc/rabbitmq/enabled_plugins
+      # 查询插件安装目录
+      rabbitmq-plugins directories
+        Listing plugin directories used by node rabbit@ea5925747aaf
+        Plugin archives directory: /opt/rabbitmq/plugins
+        Plugin expansion directory: /var/lib/rabbitmq/mnesia/rabbit@ea5925747aaf-plugins-expand
+        Enabled plugins file: /etc/rabbitmq/enabled_plugins
 
-  # 可以看到，插件的安装目录是：/opt/rabbitmq/plugins，所以把插件上传到此目录中
-  ```
+      # 可以看到，插件的安装目录是：/opt/rabbitmq/plugins，所以把插件上传到此目录中
+      ```
 
-  通过 `docker cp` 指令传输插件包到 `/opt/rabbitmq/plugins`
+      通过 `docker cp` 指令传输插件包到 `/opt/rabbitmq/plugins`
 
-  ```bash
-  # 打开电脑主机终端，传输插件到容器指定目录
-  docker cp rabbitmq_delayed_message_exchange-3.11.1.ez some-rabbit:/opt/rabbitmq/plugins
+      ```bash
+      # 打开电脑主机终端，传输插件到容器指定目录
+      docker cp rabbitmq_delayed_message_exchange-3.11.1.ez some-rabbit:/opt/rabbitmq/plugins
 
-  # 开启插件
-  rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+      # 开启插件
+      rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
-  # 验证是否开启成功
-  rabbitmq-plugins list | grep delayed
+      # 验证是否开启成功
+      rabbitmq-plugins list | grep delayed
 
-  # 只要第一列显示 [E*] 就证明安装并启动成功
-  [E*] rabbitmq_delayed_message_exchange 3.11.1
-  ```
+      # 只要第一列显示 [E*] 就证明安装并启动成功
+      [E*] rabbitmq_delayed_message_exchange 3.11.1
+      ```
 
 ## 正文开始
 
