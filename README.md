@@ -1,3 +1,5 @@
+[![Security Status](https://www.murphysec.com/platform3/v3/badge/1609162553415442432.svg)](https://www.murphysec.com/accept?code=187b64b2f2c104a23751fd8c78c75e74&type=1&from=2&t=1)
+
 # Chirpy Starter [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)](https://rubygems.org/gems/jekyll-theme-chirpy) [![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
 
 When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders `_includes`, `_layout`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file from the theme's gem. If you have ever installed this theme gem, you can use the command `bundle info --path jekyll-theme-chirpy` to locate these files.
@@ -28,7 +30,7 @@ Follow the instructions in the [Jekyll Docs](https://jekyllrb.com/docs/installat
 Then clone it to your local machine and run:
 
 ```
-$ bundle
+bundle
 ```
 
 ## Usage
