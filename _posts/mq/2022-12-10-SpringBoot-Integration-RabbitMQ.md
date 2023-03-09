@@ -15,7 +15,6 @@ SpringBoot 通过 AMQP 实现与 RabbitMQ 的集成。
 > 借助 Docker 容器的方便性，启动一个 RabbitMQ 容器
 
 ```shell
-# 启动一个 RabbitMQ 服务。
 # RabbitMQ Docker 官方描述: https://hub.docker.com/_/rabbitmq
 # 设置用户名/密码（guest/guest），后续当与 SpringBoot 集成时需要
 docker run -d -p 5672:5672 -p 15672:15672 --name some-rabbit -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest rabbitmq:management-alpine
