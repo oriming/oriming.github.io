@@ -8,7 +8,7 @@ render_with_liquid: false
 ---
 
 SpringBoot 通过 AMQP 实现与 RabbitMQ 的集成。
-基础的服务搭建工作就不介绍了，简要说一下 RabbitMQ 本地服务的构建，方便调试即可。
+基础的服务搭建工作就不介绍了，主要说明 RabvbitMQ 本地服务的构建方法，方便调试即可。
 
 ## 启动 RabbitMQ 服务
 
