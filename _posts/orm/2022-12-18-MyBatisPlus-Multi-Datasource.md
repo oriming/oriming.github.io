@@ -1,6 +1,6 @@
 ---
 title: MyBatis-Plus 多数据源
-author: Sunny Boy
+author: Orient ming
 date: 2022-12-18 18:09:00 +0800
 categories: [MyBatis-Plus, SpringBoot]
 tags: [MyBatis-Plus, SpringBoot]
@@ -85,7 +85,7 @@ import java.util.Map;
 /**
  * 数据源与包关系配置类, 配置有顺序要求, 依据小范围优先配置原则
  *
- * @author Sunny Boy
+ * @author Orient ming
  * @date 2021/7/15
  */
 @Data
@@ -126,7 +126,7 @@ import java.util.Map;
 /**
  * 数据源切换拦截器
  *
- * @author Sunny Boy
+ * @author Orient ming
  * @date 2021/7/15
  */
 @Configuration
@@ -198,7 +198,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 公众号端MVC全局配置
  *
- * @author Sunny Boy
+ * @author Orient ming
  * @date 2021/7/15
  */
 @Configuration

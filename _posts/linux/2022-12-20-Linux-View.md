@@ -1,6 +1,6 @@
 ---
 title: Linux 查看技巧
-author: Sunny Boy
+author: Orient ming
 date: 2022-12-20 21:04:00 +0800
 categories: [Linux, 运维]
 tags: [Linux, 运维]

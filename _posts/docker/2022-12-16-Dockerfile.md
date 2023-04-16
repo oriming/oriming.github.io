@@ -1,6 +1,6 @@
 ---
 title: Dockerfile
-author: Sunny Boy
+author: Orient ming
 date: 2022-12-16 16:55:00 +0800
 categories: [Docker, IDEA]
 tags: [Docker, jar]
@@ -14,7 +14,7 @@ render_with_liquid: false
 ```Dockerfile
 # 我们一般使用 alpine 的JDK，以此减小镜像的体积
 FROM openjdk:8-jdk-alpine
-LABEL maintainer="Sunny Boy"
+LABEL maintainer="Orient ming"
 
 # SpringBoot 官方推荐，最小权限原则，考虑到安全
 ARG USERNAME=spring
