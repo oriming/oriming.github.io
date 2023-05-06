@@ -2,8 +2,8 @@
 title: MyBatis-Plus 多数据源
 author: Oriental ming
 date: 2022-12-18 18:09:00 +0800
-categories: [MyBatis-Plus, SpringBoot]
-tags: [MyBatis-Plus, SpringBoot]
+categories: [ORM, MyBatis-Plus]
+tags: [ORM, MyBatis-Plus]
 render_with_liquid: false
 ---
 

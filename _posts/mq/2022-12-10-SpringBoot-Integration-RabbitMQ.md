@@ -2,8 +2,8 @@
 title: SpringBoot 集成 RabbitMQ
 author: Oriental ming
 date: 2022-11-08 14:10:00 +0800
-categories: [SpringBoot, RabbitMQ]
-tags: [Spring, RabbitMQ]
+categories: [MQ, RabbitMQ]
+tags: [MQ, RabbitMQ, SpringBoot]
 render_with_liquid: false
 ---
 

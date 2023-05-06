@@ -1,9 +1,9 @@
 ---
-title: Linux 查看技巧
+title: Linux 查询技巧
 author: Oriental ming
 date: 2022-12-20 21:04:00 +0800
-categories: [Linux, 运维]
-tags: [Linux, 运维]
+categories: [Linux, 查询技巧]
+tags: [Linux]
 render_with_liquid: false
 ---
 

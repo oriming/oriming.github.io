@@ -2,8 +2,8 @@
 title: Linux 文件处理的技巧
 author: Oriental ming
 date: 2022-12-20 21:04:00 +0800
-categories: [Linux, 运维]
-tags: [Linux, 运维]
+categories: [Linux, 文件技巧]
+tags: [Linux]
 render_with_liquid: false
 ---
 

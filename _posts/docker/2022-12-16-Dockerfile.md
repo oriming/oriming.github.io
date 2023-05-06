@@ -2,8 +2,8 @@
 title: Dockerfile
 author: Oriental ming
 date: 2022-12-16 16:55:00 +0800
-categories: [Docker, IDEA]
-tags: [Docker, jar]
+categories: [Docker, Dockerfile]
+tags: [Docker]
 render_with_liquid: false
 ---
 

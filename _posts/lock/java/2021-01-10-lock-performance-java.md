@@ -2,8 +2,8 @@
 title: 锁(Java)性能探究
 author: Oriental ming
 date: 2023-05-06 16:14:00 +0800
-categories: [锁, 性能]
-tags: [Java, Lock, 性能]
+categories: [锁, 性能探究]
+tags: [Lock, Java]
 render_with_liquid: false
 ---
 
