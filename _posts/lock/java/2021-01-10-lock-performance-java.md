@@ -7,7 +7,12 @@ tags: [Java, Lock, 性能]
 render_with_liquid: false
 ---
 
-## 前言
+# Welcome
+
+出于对 Java 锁的性能好奇，决定对锁使用的多种场景进行性能测试研究。
+其中包括 `synchronized`、`StampedLock` 和 `ReentrantLock` 情况的研究。
+
+## 测试环境
 
 环境 | 备注
 ------ | ---
@@ -17,7 +22,7 @@ CPU | M1 Pro
 内存 | 32G
 磁盘 | APPLE SSD AP0512R
 
-## 测试的锁类型
+## 场景说明
 
 锁方式 | 对应方法
 ----|---
