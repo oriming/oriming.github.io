@@ -13,6 +13,7 @@
     },
     "no-hard-tabs": true,
     "whitespace": true,
+    "MD013": false,
     "MD010": {
         // Include code blocks
         "code_blocks": true,
