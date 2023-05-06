@@ -7,9 +7,10 @@ tags: [Java, Lock, 性能]
 render_with_liquid: false
 ---
 
-## 环境 | 备注
+## 前言
 
------- | ----
+环境 | 备注
+------ | ---
 JDK | 版本 8
 OS |  macOS Ventura 13.1
 CPU | M1 Pro
@@ -22,7 +23,7 @@ CPU | M1 Pro
 ----|---
 synchronized  方法锁|  syncByMethod
 synchronized 常量锁|  syncByConstant
-synchronized 对象锁  | syncByObj
+synchronized 对象锁  | syncByThis
 StampedLock 写锁 | stampedLock
 ReentrantLock | reentrantLock
 
@@ -32,8 +33,8 @@ ReentrantLock | reentrantLock
   // syncByMethod 方式, 共执行 20组，每组 100次，最长耗时 2540毫秒, 最短耗时 128毫秒, 平均耗时 1414.950000毫秒
   // syncByMethod 方式, 共执行 20组，每组 1000次，最长耗时 25461毫秒, 最短耗时 3702毫秒, 平均耗时 19282.150000毫秒
 
-  // syncByObj 方式, 共执行 20组，每组 100次，最长耗时 2564毫秒, 最短耗时 127毫秒, 平均耗时 1542.350000毫秒
-  // syncByObj 方式, 共执行 20组，每组 1000次，最长耗时 25560毫秒, 最短耗时 3598毫秒, 平均耗时 19210.350000毫秒
+  // syncByThis 方式, 共执行 20组，每组 100次，最长耗时 2564毫秒, 最短耗时 127毫秒, 平均耗时 1542.350000毫秒
+  // syncByThis 方式, 共执行 20组，每组 1000次，最长耗时 25560毫秒, 最短耗时 3598毫秒, 平均耗时 19210.350000毫秒
 
   // syncByConstant 方式, 共执行 20组，每组 100次，最长耗时 2541毫秒, 最短耗时 128毫秒, 平均耗时 1485.900000毫秒
   // syncByConstant 方式, 共执行 20组，每组 1000次，最长耗时 25605毫秒, 最短耗时 14804毫秒, 平均耗时 21494.650000毫秒
@@ -105,7 +106,7 @@ public class LockPerformanceDemo {
      * synchronized this 对象锁
      */
     @SneakyThrows
-    public void syncByObj() {
+    public void syncByThis() {
         synchronized (this) {
             TimeUnit.MILLISECONDS.sleep(1);
             resources++;
@@ -216,14 +217,14 @@ class LockPerformanceDemoTest {
 
     @ParameterizedTest
     @CsvSource({"20, 100", "20, 1000"})
-    void syncByObj(int groupCount, int perGroupCount) {
+    void syncByThis(int groupCount, int perGroupCount) {
         groupNumber = groupCount;
         perGroupNumber = perGroupCount;
         timeCountList = Lists.newArrayListWithCapacity(groupNumber * perGroupCount);
 
-        reduce("syncByObj", service::syncByObj);
-        // syncByObj 方式, 共执行 20组，每组 100次，最长耗时 2564毫秒, 最短耗时 127毫秒, 平均耗时 1542.350000毫秒
-        // syncByObj 方式, 共执行 20组，每组 1000次，最长耗时 25560毫秒, 最短耗时 3598毫秒, 平均耗时 19210.350000毫秒
+        reduce("syncByThis", service::syncByThis);
+        // syncByThis 方式, 共执行 20组，每组 100次，最长耗时 2564毫秒, 最短耗时 127毫秒, 平均耗时 1542.350000毫秒
+        // syncByThis 方式, 共执行 20组，每组 1000次，最长耗时 25560毫秒, 最短耗时 3598毫秒, 平均耗时 19210.350000毫秒
     }
 
     @ParameterizedTest
