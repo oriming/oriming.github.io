@@ -315,4 +315,4 @@ public class SdAppConsumer {
 2022-12-13 21:38:14.094  INFO 14686 --- [ntContainer#2-1] priv.component.consumer.SdAppConsumer    : 接收的消息: {"resultEnum":"SUCCESS","typeEnum":"PORT_VALUE","content":"test"}
 ```
 
-**[演示代码 Github 地址！！！](https://github.com/3bluebird/SpringBoot-Integration-RabbitMQ)**
+**[演示代码 Github 地址！！！](https://github.com/oriming/SpringBoot-Integration-RabbitMQ)**
