@@ -103,7 +103,7 @@ public class LockDemo {
 
 ![integer-log-cacheMark](/assets/img/2023-05-07-lock-synchronized-enhance-java/2023-05-07-11-47-52.png)
 
-==结论：== 从结果看，已经实现了我们的目标要求，但是这仅仅局限于Integer范围在[-128,127]之间的整数，因为`Integer.valueOf(index)`方法使用了JVM的缓存机制。
+**结论：** 从结果看，已经实现了我们的目标要求，但是这仅仅局限于Integer范围在[-128,127]之间的整数，因为`Integer.valueOf(index)`方法使用了JVM的缓存机制。
 
 ```java
     public static Integer valueOf(int i) {
