@@ -59,7 +59,7 @@ ReentrantLock | reentrantLock
 ### 1.源代码
 
 ```java
-package priv.utrix.explore8.demo;
+package priv.explore8.demo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -166,7 +166,7 @@ public class LockPerformanceDemo {
 ### 2.测试源代码
 
 ```java
-package priv.utrix.explore8.demo;
+package priv.explore8.demo;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;

@@ -149,7 +149,7 @@ public class LockDemo {
 ### 3.1源代码
 
 ```java
-package priv.utrix.explore8.utils;
+package priv.explore8.utils;
 
 import com.google.common.collect.Sets;
 import lombok.AccessLevel;
@@ -216,7 +216,7 @@ public class LockUtil {
 ### 3.2测试
 
 ```java
-package priv.utrix.explore8.utils;
+package priv.explore8.utils;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
