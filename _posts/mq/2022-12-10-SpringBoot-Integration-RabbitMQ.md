@@ -1,6 +1,6 @@
 ---
 title: SpringBoot 集成 RabbitMQ
-author: Oriental ming
+author: Oriental Ming
 date: 2022-11-08 14:10:00 +0800
 categories: [MQ, RabbitMQ]
 tags: [MQ, RabbitMQ, SpringBoot]
@@ -101,7 +101,7 @@ import java.util.Collections;
 /**
  * RabbitMQ 配置
  *
- * @author Oriental ming
+ * @author Oriental Ming
  * @date 2022/9/13 18:42
  */
 @Slf4j
@@ -167,7 +167,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * RabbitMQ 交换机和队列配置
  *
- * @author Oriental ming
+ * @author Oriental Ming
  * @date 2022/9/13 19:04
  */
 @Configuration
@@ -245,7 +245,7 @@ import org.springframework.lang.NonNull;
 /**
  * 消息发送
  *
- * @author Oriental ming
+ * @author Oriental Ming
  * @date 2022/9/14 09:09
  */
 public interface MsgSender {
@@ -285,7 +285,7 @@ import priv.component.model.dto.MqMessage;
 /**
  * Sd APP 接收器
  *
- * @author Oriental ming
+ * @author Oriental Ming
  * @date 2022/11/12 10:25
  */
 @Slf4j

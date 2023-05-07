@@ -1,6 +1,6 @@
 ---
 title: 锁(Java synchronized)优化增强
-author: Oriental ming
+author: Oriental Ming
 date: 2023-05-07 10:04:00 +0800
 categories: [锁, synchronized优化]
 tags: [Lock, Java]
