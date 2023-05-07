@@ -21,7 +21,8 @@ timezone: Asia/Shanghai
 
 title: Oriental Ming                          # the main title
 
-tagline: I am the messenger of knowledge 😄   # it will display as the sub-title
+# 聪明在于学习，天才在于积累
+tagline: 学而时习之，温故而知新   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
 
