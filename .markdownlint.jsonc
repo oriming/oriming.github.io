@@ -16,6 +16,7 @@
     "MD013": false,
     "MD025": false,
     "MD033": false,
+    "MD046": false,
     "MD010": {
         // Include code blocks
         "code_blocks": true,
