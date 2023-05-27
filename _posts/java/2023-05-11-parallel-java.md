@@ -32,7 +32,7 @@ boolean res4 = service4.rpcOperate(jjjj);
 
 **最终的目的：**扩大资源利用率，减少任务列表执行的总耗时。 如上示例串行需要耗时 18秒，而并行只需要 6秒左右！
 
-## 依赖
+## 1. 依赖
 
 ```xml
    <dependencies>
@@ -55,7 +55,7 @@ boolean res4 = service4.rpcOperate(jjjj);
     </dependencies>
 ```
 
-## 源码
+## 2. 源码
 
 ```java
 package org.example.starter.util;
@@ -162,9 +162,9 @@ public final class ParallelUtil {
 }
 ```
 
-## Unit Test
+## 3. Unit Test
 
-### Abstract class
+### 3.1 Abstract class
 
 ```java
 package org.example;
@@ -198,7 +198,7 @@ public abstract class AbstractAsyncTest {
 
 ```
 
-### ParallelUtil Test
+### 3.2 ParallelUtil Test
 
 ```java
 package org.example.starter.util;
@@ -276,9 +276,9 @@ class ParallelUtilTest extends AbstractAsyncTest {
 }
 ```
 
-## 测试结果
+## 4. 测试结果
 
-### serialExec Method
+### 4.1 serialExec Method
 
 ```java
 对象: 0，    线程ID: 1,     线程name: main,     延迟 6874 毫秒
@@ -297,7 +297,7 @@ class ParallelUtilTest extends AbstractAsyncTest {
 [0, 1, 2, 3, 4, 5]
 ```
 
-### execAsyncBatchByMine Method
+### 4.2 execAsyncBatchByMine Method
 
 ```java
 
@@ -318,7 +318,7 @@ class ParallelUtilTest extends AbstractAsyncTest {
 
 ```
 
-### execAsyncBatchByGuava Method
+### 4.3 execAsyncBatchByGuava Method
 
 ```java
 对象: 2，    线程ID: 16,     线程name: pool-1-thread-1,     延迟 5643 毫秒

@@ -9,7 +9,7 @@ render_with_liquid: false
 
 > 收集整理出一些在运维时常用的文件处理技巧。后续会对内容再补充完善。
 
-## 清理 nohup.out
+## 1. 清理 nohup.out
 
 > 生产中因为长时间不处理nohup.out文件，导致文件会特别的大，在查询日志等方面会非常的不方便。在
 > 清理nohup.out文件时保持程序的正常运行就显得比较重要了。
@@ -30,7 +30,7 @@ nohup java -jar nectarine.jar &> /dev/null &
 
 -----
 
-## 清除 Windows 系统回车符
+## 2. 清除 Windows 系统回车符
 
 > 找到两种解决方式，一种是 `vim` ，另一种是软件 `dos2unix`，两者都好用不复杂！😇
 

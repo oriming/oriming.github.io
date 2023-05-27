@@ -14,7 +14,7 @@ render_with_liquid: false
 
 ----
 
-## 1.原理 — 锁对象探究
+## 1. 原理 — 锁对象探究
 
 |锁| 说明 |
 |--|--|
@@ -35,11 +35,11 @@ render_with_liquid: false
 
 ![锁mark-notExec](/assets/img/2023-05-07-lock-synchronized-enhance-java/2023-05-07-11-44-29.png)
 
-## 2.铺垫 — 研究示例
+## 2. 铺垫 — 研究示例
 
 *模拟`用户表主键userId`的类型为 Integer，对其进行锁定。*
 
-### 2.1锁Integer对象[-128,127]
+### 2.1 锁Integer对象[-128,127]
 
 ```java
 import cn.hutool.core.lang.Console;
@@ -116,7 +116,7 @@ public class LockDemo {
 
 ----
 
-### 2.2锁Integer对象 非[-128,127]范围
+### 2.2 锁Integer对象 非[-128,127]范围
 
 执行的方法一样，唯独生成的随机数范围不一致
 
@@ -138,7 +138,7 @@ public class LockDemo {
 
 **结论：** 从日志分析发现，`相同下标对象同时执行了业务逻辑`，这说明锁已经失效。因为`超出JVM Integer的缓存`之后，都将`new`一个新对象，所以即使*下标对象的值一样，但是对象不一样*，导致各线程抢夺的对象不一致，故锁失效。
 
-## 3.成果 — 隆重登场
+## 3. 成果 — 隆重登场
 
 > 现在我们有一个大前提，和一个条件。分别是：
 > 前提： 将业务逻辑的【唯一标识(暂定mark)】作为锁对象
@@ -146,7 +146,7 @@ public class LockDemo {
 
 **所以想到了利用缓存。既然JVM内部封装的Integer缓存机制可以实现，那么我们也可以自定义对象缓存机制实现！**
 
-### 3.1源代码
+### 3.1 源代码
 
 ```java
 package priv.explore8.utils;
@@ -213,7 +213,7 @@ public class LockUtil {
 
 ```
 
-### 3.2测试
+### 3.2 测试
 
 ```java
 package priv.explore8.utils;

@@ -9,7 +9,7 @@ render_with_liquid: false
 
 > 收集整理出一些在运维时常用的查看技巧。后续会对内容再补充完善。
 
-## 查本机外网 IP
+## 1. 查本机外网 IP
 
 ```bash
 
@@ -19,7 +19,7 @@ curl ifconfig.co
 
 -----
 
-## 查 PID 文件启动位置
+## 2. 查 PID 文件启动位置
 
 ```bash
 # 先查 PID。例：某个正在启动的 jar 包 PID
@@ -32,7 +32,7 @@ ll /proc/188 | grep cwd
 
 -----
 
-## 查文件数量
+## 3. 查文件数量
 
 ```bash
 # 统计当前目录下文件的个数（不包括目录）
@@ -47,7 +47,7 @@ ls -lR | grep "^d" | wc -l
 
 -----
 
-## 查文件大小
+## 4. 查文件大小
 
 ```bash
 # 显示此目录下所有文件的总大小
@@ -63,7 +63,7 @@ find . -type f -size +100M
 
 -----
 
-## 查 IO 性能（粗略）
+## 5. 查 IO 性能（粗略）
 
 > 依托自身的dd命令 粗略查看磁盘IO性能。测试前需要先把
 > 缓存清理之后再测试。
@@ -99,7 +99,7 @@ find . -type f -size +100M
 
 -----
 
-## 查 history
+## 6. 查 history
 
 > 有的时候我们想查看那个IP操作过哪些内容，可以通过history命令实现。
 
@@ -128,7 +128,7 @@ history | grep redis | less
 
 -----
 
-## locate 替代 find
+## 7. locate 替代 find
 
 > 使用locate的理由:  使用find会占用系统的大量资源，在生产上使用find命令是禁忌。
 > 而locate会建立一个文件资料库， 节省很多系统的资源。

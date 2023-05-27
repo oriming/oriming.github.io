@@ -11,7 +11,7 @@ render_with_liquid: false
 
 提供一个可供参考的线程池配置。重点是对**线程数量的配置**和**拒绝策略**的制定。
 
-## 线程数配置策略
+## 1. 线程数配置策略
 
 **线程池的理想大小取决于被提交任务的类型以及所部属系统的特性。** 在代码中通常不会固定线程池的大小，而应该通过某种配置机制来
 提供，或者根据 `Runtime.availableProcessors` 来动态计算。
@@ -55,7 +55,7 @@ int N_CPUS = Runtime.getRuntime().availableProcessors();
 
 ------------ **以上内容摘自 《Java 并发编程实战》 第8章第2节**  ------------
 
-## 示例配置
+## 2. 示例配置
 
 ```java
 package com.github.config;
@@ -128,7 +128,7 @@ public class ThreadPoolTaskConfig {
 }
 ```
 
-## 自定义拒绝策略
+## 3. 自定义拒绝策略
 
 ```java
 package com.github.config;

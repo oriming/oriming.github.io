@@ -12,7 +12,7 @@ render_with_liquid: false
 出于对 Java 锁的性能好奇，决定对锁使用的多种场景进行性能测试研究。
 其中包括 `synchronized`、`StampedLock` 和 `ReentrantLock` 情况的研究。
 
-## 测试环境
+## 1. 测试环境
 
 环境 | 备注
 ------ | ---
@@ -22,7 +22,7 @@ CPU | M1 Pro
 内存 | 32G
 磁盘 | APPLE SSD AP0512R
 
-## 场景说明
+## 2. 场景说明
 
 锁方式 | 对应方法
 ----|---
@@ -32,7 +32,7 @@ synchronized 对象锁  | syncByThis
 StampedLock 写锁 | stampedLock
 ReentrantLock | reentrantLock
 
-## 结果
+## 3. 结果
 
 ```java
   // syncByMethod 方式, 共执行 20组，每组 100次，最长耗时 2540毫秒, 最短耗时 128毫秒, 平均耗时 1414.950000毫秒
@@ -54,9 +54,9 @@ ReentrantLock | reentrantLock
 **总结：**
 在普通场景下使用，各种锁的性能相差无几。
 
-## 代码
+## 4. 代码
 
-### 1.源代码
+### 4.1 源代码
 
 ```java
 package priv.explore8.demo;
@@ -163,7 +163,7 @@ public class LockPerformanceDemo {
 }
 ```
 
-### 2.测试源代码
+### 4.2 测试源代码
 
 ```java
 package priv.explore8.demo;

@@ -12,7 +12,7 @@ render_with_liquid: false
 借助 `JDK(version>7) Stream` 的便利性，对两个 `List<Map>` 依据业务要求进行合并。
 依据业务主键(`id 或 code 或 xxx`)对值对象进行合并。
 
-## 1.样例数据
+## 1. 样例数据
 
 ```java
  // ============== new三条源数据，value值均为一个字，加入list ==================
@@ -70,7 +70,7 @@ render_with_liquid: false
          */
 ```
 
-## 2.目标结果
+## 2. 目标结果
 
 ```java
         /*
@@ -81,7 +81,7 @@ render_with_liquid: false
          */
 ```
 
-## 3.策略
+## 3. 策略
 
 ```java
         // ================ 利用Java8的Stream流实现合并 =========================

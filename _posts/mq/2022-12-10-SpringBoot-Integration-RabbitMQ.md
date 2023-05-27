@@ -10,7 +10,7 @@ render_with_liquid: false
 SpringBoot 通过 AMQP 实现与 RabbitMQ 的集成。
 基础的服务搭建工作就不介绍了，主要说明 RabvbitMQ 本地服务的构建方法，方便调试即可。
 
-## 启动 RabbitMQ 服务
+## 1. 启动 RabbitMQ 服务
 
 > 借助 Docker 容器的方便性，启动一个 RabbitMQ 容器
 
@@ -74,12 +74,12 @@ docker run -d -p 5672:5672 -p 15672:15672 --name some-rabbit -e RABBITMQ_DEFAULT
       [E*] rabbitmq_delayed_message_exchange 3.11.1
       ```
 
-## 正文开始
+## 2. 正文开始
 
 > 创建一个 SpringBoot 基础项目。
 > 从 [Spring 官方构建](https://start.spring.io/) ，或者 IDEA 构建都可以。这里就不做赘述了 😜。
 
-### 连接 RabbitMQ Broker
+### 2.1 连接 RabbitMQ Broker
 
 ```java
 package com.mq.config;
@@ -149,7 +149,7 @@ public class RabbitFactoryConfig {
 
 {: .nolineno }
 
-### Exchange 与 Queue 配置示例
+### 2.2 Exchange 与 Queue 配置示例
 
 ```java
 package com.common.mq.config;
@@ -235,7 +235,7 @@ public class RabbitExchangeAndQueueConfig {
 
 {: .nolineno }
 
-### 消息发送 Service
+### 2.3 消息发送 Service
 
 ```java
 package priv.component.service;
@@ -268,7 +268,7 @@ public interface MsgSender {
 }
 ```
 
-### 消息消费
+### 2.4 消息消费
 
 ```java
 package priv.component.consumer;
@@ -307,7 +307,7 @@ public class SdAppConsumer {
 }
 ```
 
-## 测试
+## 3. 测试
 
 启动服务，发起集成测试，验证消息是否成功订阅：
 
