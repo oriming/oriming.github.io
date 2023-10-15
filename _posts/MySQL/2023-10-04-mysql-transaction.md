@@ -78,7 +78,7 @@ SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
 + **脏读（Dirty Read）**
 
-    简单讲就是，`事务A` 读取了 `事务B` 未 commit 的数据！违反了<u>**一致性**</u>要求!
+    简单讲就是，`事务A` 读取了 `事务B` 未 commit 的数据！违反了**一致性**要求!
 
     因为当 `事务B` Rollback后，`事务A` 之前读取就是脏数据，所以称为 **脏读**。
 
@@ -98,7 +98,7 @@ SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
 + **不可重复读（Non-Repeatable Read）**
 
-    简单讲就是，`事务A` 相同的查询语句在不同时刻读出的结果不一致，违反了<u>**隔离性**</u>要求！
+    简单讲就是，`事务A` 相同的查询语句在不同时刻读出的结果不一致，违反了**隔离性**要求！
 
     **针对的是 <font color="red"> Update </font> 操作。**
 
@@ -118,7 +118,7 @@ SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
 + **幻读（Phantom Read）**
 
-    简单讲就是，`事务A` 读取了 `事务B` commit 的数据，违反了<u>**隔离性**</u>要求！
+    简单讲就是，`事务A` 读取了 `事务B` commit 的数据，违反了**隔离性**要求！
 
     **针对的是 <font color="red"> Insert、Delete </font> 操作。**
 
