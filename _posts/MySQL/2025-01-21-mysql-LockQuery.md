@@ -17,7 +17,7 @@ render_with_liquid: false
 
 > 查询所需被锁的对象
 
-```SQL
+```sql
 -- 查询出的结果，THREAD_ID 是 MySQL 内部线程ID
 SELECT * FROM performance_schema.data_locks;
 ```
@@ -26,7 +26,7 @@ SELECT * FROM performance_schema.data_locks;
 
 ## 2. 找到用户线程ID
 
-```SQL
+```sql
 -- 依据 MySQL 内部线程ID 查询用户线程ID
 SELECT * FROM performance_schema.threads WHERE THREAD_ID = <mysql_inner_thread_id>;
 ```
@@ -35,6 +35,6 @@ SELECT * FROM performance_schema.threads WHERE THREAD_ID = <mysql_inner_thread_i
 
 ## 3. Kill 它
 
-```SQL
+```sql
 KILL <PROCESSLIST_ID>
 ```
