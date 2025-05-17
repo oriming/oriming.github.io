@@ -26,6 +26,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Reset platform config  # 新增步骤
+        run: |
+          bundle config unset frozen
+          bundle config unset deployment
+          bundle lock --remove-platform arm64-darwin
+          bundle lock --add-platform x86_64-linux
+
       - name: Clean Ruby and Bundler cache
         run: |
           rm -rf ~/.bundle/cache
@@ -37,6 +44,7 @@ jobs:
           ruby-version: "3.1"
           bundler-cache: true
           cache-version: 9
+          bundler: "2.5.13"
 
       - name: Clean Sass Cache
         run: |
