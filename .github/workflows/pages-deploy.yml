@@ -26,13 +26,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Reset platform config  # 新增步骤
-        run: |
-          bundle config unset frozen
-          bundle config unset deployment
-          bundle lock --remove-platform arm64-darwin
-          bundle lock --add-platform x86_64-linux
-
       - name: Clean Ruby and Bundler cache
         run: |
           rm -rf ~/.bundle/cache
