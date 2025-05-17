@@ -26,6 +26,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Clean Ruby and Bundler cache
+        run: |
+          rm -rf ~/.bundle/cache
+          rm -rf vendor/bundle
+          bundle clean --force
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
