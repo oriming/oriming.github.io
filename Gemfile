@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-gem "github-pages", "~> 232", group: :jekyll_plugins
-# gem "jekyll", "~> 4.3"  # 明确指定版本
+gem "jekyll", "~> 4.3"  # 明确指定版本
 gem "csv"
 
 gem "sass-embedded", "~> 1.69"
