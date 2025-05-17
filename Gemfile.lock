@@ -115,7 +115,7 @@ PLATFORMS
 DEPENDENCIES
   csv
   html-proofer (~> 3.18)
-  jekyll
+  jekyll (~> 4.3)
   jekyll-theme-chirpy (~> 5.3, >= 5.3.2)
   tzinfo (~> 1.2)
   tzinfo-data

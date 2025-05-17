@@ -4,10 +4,6 @@ source "https://rubygems.org"
 gem "jekyll", "~> 4.3"  # 明确指定版本
 gem "csv"
 
-platforms :ruby do  # 强制使用跨平台版本
-  gem "sass-embedded", "~> 1.69"
-end
-
 gem "jekyll-theme-chirpy", "~> 5.3", ">= 5.3.2"
 
 group :test do
