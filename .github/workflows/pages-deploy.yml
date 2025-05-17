@@ -29,11 +29,10 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.1"  # 必须加引号（YAML 规范）
+          ruby-version: "3.1"
           bundler-cache: true
-          cache-version: 8
+          cache-version: 9
 
-      # 现在 bundle 命令可用
       - name: Clean Sass Cache
         run: |
           bundle config unset frozen
@@ -58,7 +57,7 @@ jobs:
           bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # 改用专用上传器
+        uses: actions/upload-pages-artifact@v2
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
