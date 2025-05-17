@@ -52,10 +52,13 @@ jobs:
         run: |
           bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href
 
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2  # 必须使用专用上传器
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4  # 必须使用 v4
         with:
+          name: jekyll-site
           path: "_site${{ steps.pages.outputs.base_path }}"
+          retention-days: 1
+          if-no-files-found: error  # 确保路径存在
 
   deploy:
     environment:
