@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-gem "github-pages", "~> GITHUB-PAGES-VERSION", group: :jekyll_plugins
+gem "github-pages", "~> 232", group: :jekyll_plugins
 # gem "jekyll", "~> 4.3"  # 明确指定版本
 gem "csv"
 
