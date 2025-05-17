@@ -65,12 +65,3 @@ com.microsoft.VSCode
 
 + 鼠须管-重新部署，使其生效
 ![重新部署](/assets/img/2025-05-17-squirrel/2025-05-17-07-56-35.png)
-
-============= <<<完结撒花>>> =============
-
-<br/>
-<br/>
-
-核心内容摘自：
-
-+ wego_xuchang <https://juejin.cn/post/6989900968833843231>

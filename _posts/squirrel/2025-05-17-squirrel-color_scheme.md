@@ -195,12 +195,3 @@ preset_color_schemes:
     text_color: 0xFFFFFF
     hilited_text_color: 0x777777
 ```
-
-============= <<<完结撒花>>> =============
-
-<br/>
-<br/>
-
-核心内容摘自：
-
-+ wego_xuchang <https://juejin.cn/post/6989900968833843231>
