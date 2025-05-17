@@ -32,7 +32,7 @@ render_with_liquid: false
 2. 鼠标选中后右键-显示简介（快捷键 Command + i）
 3. 获取弹窗顶部的应用名称（我们要用的）
 
-![alt text](<CleanShot 2025-05-17 at 07.42.24@2x.png>)
+![alt text](../../assets/img/2025-05-17-squirrel/2025-05-17-07-42-24.png)
 
 ### 1.2 获取 APP 标识
 
@@ -53,18 +53,18 @@ osascript -e 'id of app "Visual Studio Code"'
 com.microsoft.VSCode
 ```
 
-![alt text](<CleanShot 2025-05-17 at 07.49.40@2x.png>)
+![APP标识](/assets/img/2025-05-17-squirrel/2025-05-17-07-49-40.png)
 
 ## 2. 配置到鼠须管配置文件中
 
-+ 1. 打开配置文件 Squirrel.yaml
-![alt text](<CleanShot 2025-05-17 at 07.51.31@2x.png>)
++ 打开配置文件 Squirrel.yaml
+![配置文件地址](/assets/img/2025-05-17-squirrel/2025-05-17-07-51-31.png)
 
-+ 2. 找到 app_options，然后配置好
-![alt text](<CleanShot 2025-05-17 at 07.55.17@2x.png>)
++ 找到 app_options，然后配置好
+![app_options位置](/assets/img/2025-05-17-squirrel/2025-05-17-07-55-17.png)
 
-+ 3. 鼠须管-重新部署，使其生效
-![alt text](<CleanShot 2025-05-17 at 07.56.35@2x.png>)
++ 鼠须管-重新部署，使其生效
+![重新部署](/assets/img/2025-05-17-squirrel/2025-05-17-07-56-35.png)
 
 ============= <<<完结撒花>>> =============
 

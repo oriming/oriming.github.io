@@ -19,7 +19,7 @@ render_with_liquid: false
 ## 1. 配置主题
 
 1. 打开配置文件
-![alt text](image.png)
+![配置文件地址](/assets/img/2025-05-17-squirrel/2025-05-17-07-59-11.png)
 
 2. 找到主题标签 `style.color_scheme` 和 `style.color_scheme_dark`，并设定主题风格
 
