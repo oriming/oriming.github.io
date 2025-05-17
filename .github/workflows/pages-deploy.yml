@@ -64,7 +64,6 @@ jobs:
 
       - name: Clean previous artifacts
         run: |
-          rm -rf _site/  # 强制清理构建目录
           rm -rf ~/.bundle/cache  # 补充清理缓存
 
       - name: Upload artifact
