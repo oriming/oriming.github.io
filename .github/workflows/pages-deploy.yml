@@ -31,7 +31,7 @@ jobs:
         with:
           ruby-version: "3.1"  # 必须加引号（YAML 规范）
           bundler-cache: true
-          cache-version: 7
+          cache-version: 8
 
       # 现在 bundle 命令可用
       - name: Clean Sass Cache
