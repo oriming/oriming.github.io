@@ -1,7 +1,7 @@
 name: "Build and Deploy"
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
       - .gitignore
       - README.md
@@ -70,8 +70,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # environment:
-    #   name: github-pages
+    environment:
+      name: github-pages
     #   url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write
