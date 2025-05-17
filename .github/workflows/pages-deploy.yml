@@ -30,7 +30,6 @@ jobs:
         run: |
           rm -rf ~/.bundle/cache
           rm -rf vendor/bundle
-          bundle clean --force
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
