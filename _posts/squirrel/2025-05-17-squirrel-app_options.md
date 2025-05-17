@@ -1,5 +1,5 @@
 ---
-title: 鼠须管(Squirrel)app_options 配置
+title: 鼠须管(Squirrel) app_options 配置
 author: Oriental Ming
 date: 2023-10-04 11:13:00 +0800
 categories: [Squirrel]
