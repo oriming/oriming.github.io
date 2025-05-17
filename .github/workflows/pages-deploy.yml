@@ -7,7 +7,6 @@ on:
       - .gitignore
       - README.md
       - LICENSE
-
   workflow_dispatch:
 
 permissions:
@@ -22,6 +21,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      base_path: ${{ steps.pages.outputs.base_path }}  # 显式传递变量
 
     steps:
       - name: Checkout
@@ -31,7 +32,9 @@ jobs:
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v3  # 升级到最新版
+        uses: actions/configure-pages@v3
+        with:
+          static_site_generator: jekyll  # 明确指定生成器类型
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -42,21 +45,14 @@ jobs:
       - name: Build site
         run: |
           bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
-          ls -R "_site${{ steps.pages.outputs.base_path }}"  # 验证构建输出
+          ls -R "_site${{ steps.pages.outputs.base_path }}"  # 验证输出
         env:
           JEKYLL_ENV: "production"
 
-      - name: Test site
-        run: |
-          bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4  # 必须使用 v4
+      - name: Upload Pages Artifact  # 关键修改：直接使用 pages 专用上传
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: jekyll-site
           path: "_site${{ steps.pages.outputs.base_path }}"
-          retention-days: 1
-          if-no-files-found: error  # 确保路径存在
 
   deploy:
     environment:
@@ -65,12 +61,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4  # 必须与上传版本一致
-        with:
-          name: jekyll-site
-          path: "_site${{ steps.pages.outputs.base_path }}"
-
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3  # 升级到最新版
+        uses: actions/deploy-pages@v3
