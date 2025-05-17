@@ -24,6 +24,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Clean Sass Cache
+        run: |
+          bundle config unset frozen
+          bundle config unset deployment
+          bundle lock --add-platform x86_64-linux
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -40,6 +46,7 @@ jobs:
         with:
           ruby-version: 3.1
           bundler-cache: true
+          cache-version: 7  # 强制刷新缓存
 
       - name: Build site
         run: |
