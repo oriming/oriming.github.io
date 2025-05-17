@@ -55,7 +55,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v2  # 必须使用专用上传器
         with:
-          path: "./_site"  # 直接使用固定路径
+          path: "_site${{ steps.pages.outputs.base_path }}"
 
   deploy:
     environment:
