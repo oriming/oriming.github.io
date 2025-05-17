@@ -1,13 +1,11 @@
 name: "Build and Deploy"
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths-ignore:
       - .gitignore
       - README.md
       - LICENSE
-
   workflow_dispatch:
 
 permissions:
@@ -22,36 +20,36 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"  # 必须加引号（YAML 规范）
+          bundler-cache: true
+          cache-version: 7
+
+      # 现在 bundle 命令可用
       - name: Clean Sass Cache
         run: |
           bundle config unset frozen
           bundle config unset deployment
           bundle lock --add-platform x86_64-linux
 
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
         with:
-          static_site_generator: jekyll  # 明确指定生成器类型
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1
-          bundler-cache: true
-          cache-version: 7  # 强制刷新缓存
+          static_site_generator: jekyll
 
       - name: Build site
         run: |
           bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
-          ls -R "_site${{ steps.pages.outputs.base_path }}"  # 验证构建输出
+          ls -R "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
 
@@ -60,12 +58,9 @@ jobs:
           bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4  # 必须使用 v4
+        uses: actions/upload-pages-artifact@v2  # 改用专用上传器
         with:
-          name: jekyll-site
           path: "_site${{ steps.pages.outputs.base_path }}"
-          retention-days: 1
-          if-no-files-found: error  # 确保路径存在
 
   deploy:
     environment:
@@ -76,4 +71,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3  # 升级到最新版
+        uses: actions/deploy-pages@v3
