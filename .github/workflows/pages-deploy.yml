@@ -24,49 +24,65 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # 允许推送部署
+      pages: write      # 允许操作 GitHub Pages
+      id-token: write   # 允许 OIDC 认证
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-          # submodules: true
-          # If using the 'assets' git submodule from Chirpy Starter, uncomment above
-          # (See: https://github.com/cotes2020/chirpy-starter/tree/main/assets)
+          node-version: 20
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v1
+      - name: Install Dependencies
+        run: npm ci
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Build Static Site
+        run: npm run build  # 假设生成到 `dist/` 目录
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4  # 推荐使用 v4
         with:
-          ruby-version: 3.1 # reads from a '.ruby-version' or '.tools-version' file if 'ruby-version' is omitted
-          bundler-cache: true
-
-      - name: Build site
-        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
-        uses: actions/download-artifact@v4
-        env:
-          JEKYLL_ENV: "production"
-
-      - name: Test site
-        run: |
-          bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href
-
-      - name: Upload site artifact
-        # uses: actions/upload-pages-artifact@v1
-        uses: actions/upload-artifact@v4
-        with:
-          path: "_site${{ steps.pages.outputs.base_path }}"
+          name: static-site
+          path: dist/
+          retention-days: 1  # 临时保留工件（部署后自动清理）
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build  # 依赖构建作业
     runs-on: ubuntu-latest
-    needs: build
+    permissions:
+      pages: write
+      actions: read
+
     steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: static-site
+          path: dist/  # 解压到同名目录
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/  # 必须与下载路径一致
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
+
+  post-cleanup:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()  # 无论部署成功与否都执行
+    steps:
+      - name: Delete Build Artifact
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: static-site
