@@ -121,6 +121,23 @@ public class ThreadPoolTaskConfig {
         poolTaskExecutor.setRejectedExecutionHandler(new MyRejectedExecutionHandler());
         poolTaskExecutor.setAllowCoreThreadTimeOut(true);
 
+        // 注意：一定要传播上下文，保证多线程异步场景下 Spring 上下文的一致性（HttpRequest、SqlSession…）
+        poolTaskExecutor.setTaskDecorator(runnable -> {
+            RequestAttributes context = RequestContextHolder.getRequestAttributes();
+            Map<String, String> mdcContext = MDC.getCopyOfContextMap();
+            return () -> {
+                try {
+                    // 如果使用了 Spring Security 也一并传递，确保在子线程中能拿到正确的上下文信息
+                    if (context != null) RequestContextHolder.setRequestAttributes(context);
+                    if (mdcContext != null) MDC.setContextMap(mdcContext);
+                    runnable.run();
+                } finally {
+                    RequestContextHolder.resetRequestAttributes();
+                    MDC.clear();
+                }
+            };
+        });
+
         poolTaskExecutor.initialize();
         return poolTaskExecutor;
     }
