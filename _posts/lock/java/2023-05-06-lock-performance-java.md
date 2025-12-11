@@ -1,6 +1,6 @@
 ---
 title: 锁(Java)性能探究
-author: Oriental Ming
+author: Ori Ming
 date: 2023-05-06 16:14:00 +0800
 categories: [锁, 性能探究]
 tags: [Lock, Java]
@@ -79,7 +79,7 @@ import java.util.concurrent.locks.StampedLock;
  *    原因：synchronized引入了偏向锁、轻量级锁、重量级锁，并提供了自动的升级降级机制
  * </pre>
  *
- * @author Oriental Ming
+ * @author Ori Ming
  * @date 2023/5/6 16:35
  */
 public class LockPerformanceDemo {

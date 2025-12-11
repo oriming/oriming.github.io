@@ -1,6 +1,6 @@
 ---
 title: Spring 事务
-author: Oriental Ming
+author: Ori Ming
 date: 2023-10-04 11:13:00 +0800
 categories: [Spring, 事务]
 tags: [Spring]
@@ -720,7 +720,7 @@ import java.util.function.Supplier;
 /**
  * 事务工具类
  *
- * @author Oriental Ming
+ * @author Ori Ming
  */
 @Slf4j
 @Configuration

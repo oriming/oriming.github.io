@@ -1,6 +1,6 @@
 ---
 title: Linux 文件处理技巧
-author: Oriental Ming
+author: Ori Ming
 date: 2022-12-20 21:04:00 +0800
 categories: [Linux, 文件技巧]
 tags: [Linux]

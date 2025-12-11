@@ -1,6 +1,6 @@
 ---
 title: MySQL 事务
-author: Oriental Ming
+author: Ori Ming
 date: 2023-10-04 11:13:00 +0800
 categories: [MySQL, 事务]
 tags: [MySQL]

@@ -1,6 +1,6 @@
 ---
 title: Java 并行 Util
-author: Oriental Ming
+author: Ori Ming
 date: 2023-05-11 21:14:00 +0800
 categories: [Java, 并行 Util]
 tags: [Java, Parallel]
@@ -82,7 +82,7 @@ import java.util.function.Supplier;
  *       3. 每项任务的执行都比较耗时
  * </pre>
  *
- * @author Oriental Ming
+ * @author Ori Ming
  * @date 2023/5/11 19:58
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -178,7 +178,7 @@ import java.util.function.Consumer;
 /**
  * 公共的异步测试类
  *
- * @author Oriental Ming
+ * @author Ori Ming
  * @date 2023/5/11 20:18
  */
 public abstract class AbstractAsyncTest {

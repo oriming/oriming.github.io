@@ -1,6 +1,6 @@
 ---
 title: MySQL 锁表排查处理
-author: Oriental Ming
+author: Ori Ming
 date: 2025-01-21 18:13:00 +0800
 categories: [MySQL, 锁表]
 tags: [MySQL]

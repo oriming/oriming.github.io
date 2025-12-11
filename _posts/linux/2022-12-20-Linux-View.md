@@ -1,6 +1,6 @@
 ---
 title: Linux 查询技巧
-author: Oriental Ming
+author: Ori Ming
 date: 2022-12-20 21:04:00 +0800
 categories: [Linux, 查询技巧]
 tags: [Linux]
