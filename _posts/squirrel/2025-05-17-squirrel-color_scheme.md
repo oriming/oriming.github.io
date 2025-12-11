@@ -1,6 +1,6 @@
 ---
 title: 鼠须管(Squirrel) color_scheme 配置
-author: Oriental Ming
+author: Ori Ming
 date: 2025-05-17 8:00:00 +0800
 categories: [Squirrel]
 tags: [Squirrel]

@@ -1,6 +1,6 @@
 ---
 title: Spring线程池配置
-author: Oriental Ming
+author: Ori Ming
 date: 2023-05-07 15:20:00 +0800
 categories: [Spring, 线程池配置]
 tags: [Java, Spring]
@@ -70,7 +70,7 @@ import java.util.concurrent.ThreadFactory;
 /**
  * 线程池配置
  *
- * @author Oriental Ming
+ * @author Ori Ming
  */
 @Configuration
 public class ThreadPoolTaskConfig {
@@ -166,7 +166,7 @@ import java.util.concurrent.atomic.LongAdder;
  *     创建新线程去执行任务
  * </pre>
  *
- * @author Oriental Ming
+ * @author Ori Ming
  */
 @Slf4j
 public class MyRejectedExecutionHandler implements RejectedExecutionHandler {
