@@ -19,7 +19,7 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Oriental Ming                          # the main title
+title: Ori Ming                          # the main title
 
 # 聪明在于学习，天才在于积累
 tagline: 学而时习之，温故而知新   # it will display as the sub-title
@@ -38,7 +38,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: OrientalMing
+  name: OriMing
   email: idea1110@163.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
